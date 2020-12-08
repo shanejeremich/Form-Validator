@@ -52,6 +52,16 @@ function checkLength(input, min, max) {
   }
 }
 
+// Check password is valid
+function checkPassword(input) {
+  const decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+  if (input.value.match(decimal)) {
+    showSuccess(input);
+  } else {
+    showError(input, `One upper, lower, numeric and special character`);
+  }
+}
+
 // Check passwords match
 function checkPasswordsMatch(input1, input2) {
   if (input1.value !== input2.value) {
@@ -72,5 +82,6 @@ form.addEventListener("submit", function (e) {
   checkLength(username, 3, 15);
   checkLength(password, 6, 25);
   checkEmail(email);
+  checkPassword(password);
   checkPasswordsMatch(password, password2);
 });
